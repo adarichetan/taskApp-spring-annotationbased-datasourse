@@ -1,0 +1,37 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="entityManagerFactory" class="jakarta.persistence.Persistence" factory-method="createEntityManagerFactory">
+        <constructor-arg type="java.lang.String" index="0" value="myPersist"/>
+    </bean>
+
+    <bean id="entityManager" factory-bean="entityManagerFactory" factory-method="createEntityManager"/>
+
+    <bean id="temp" abstract="true">
+        <property name="entityManager" ref="entityManager"/>
+    </bean>
+
+    <bean id="userDao" class="com.dss.daoImpl.UserDaoImpl" autowire="constructor"/>
+
+    <bean id="taskDao" class="com.dss.daoImpl.TaskDaoImpl" parent="temp"/>
+
+
+
+    <bean id="userService" class="com.dss.serviceImpl.UserServiceImpl" >
+      <property name="userDao" ref="userDao"/>
+    </bean>
+
+    <bean id="taskService" class="com.dss.serviceImpl.TaskServiceImpl">
+     <property name="taskDao" ref="taskDao"/>
+    </bean>
+
+
+
+    <bean id="view" class="com.dss.view.View">
+        <constructor-arg ref="userService"/>
+        <constructor-arg ref="taskService"/>
+    </bean>
+
+</beans>
