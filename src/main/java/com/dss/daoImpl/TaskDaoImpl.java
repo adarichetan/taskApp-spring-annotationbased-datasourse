@@ -2,16 +2,22 @@ package com.dss.daoImpl;
 
 import com.dss.dao.TaskDao;
 import com.dss.model.Task;
+import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-@Setter
+
 @NoArgsConstructor
+@Repository
 public class TaskDaoImpl implements TaskDao {
+
+    @Inject
     private EntityManager entityManager;
 
     @Override

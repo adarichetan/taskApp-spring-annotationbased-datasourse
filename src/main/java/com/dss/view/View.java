@@ -4,19 +4,25 @@ import com.dss.model.Task;
 import com.dss.model.User;
 import com.dss.service.TaskService;
 import com.dss.service.UserService;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.lang.model.element.Name;
 import java.util.List;
 import java.util.Scanner;
 
-
+@Named
 public class View {
+
     private UserService userService;
     private TaskService taskService;
 
+    @Inject
     public View(TaskService taskService, UserService userService) {
         this.taskService = taskService;
         this.userService = userService;
@@ -26,7 +32,7 @@ public class View {
 
     public void showMenu() {
         boolean hey = true;
-        while(hey) {
+        while (hey) {
 
             System.out.println("-------------------");
             System.out.println("     TASK APP  ");
@@ -46,7 +52,7 @@ public class View {
                 case 3 -> getAllUsers();
                 case 4 -> getAllTasks();
                 case 5 -> {
-                    hey=false;
+                    hey = false;
                     break;
                 }
                 default -> System.out.println("Goodbye!");
@@ -83,6 +89,9 @@ public class View {
         System.out.print("Enter task status: ");
         String status = scanner.next();
         System.out.print("Enter User ID to assign this task to: ");
+        List<User> allUsers = userService.getAllUsers();
+        System.out.println(allUsers);
+
         Long userId = scanner.nextLong();
 
         User user = userService.getUserById(userId);
