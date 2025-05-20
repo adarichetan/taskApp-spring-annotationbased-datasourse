@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="taskapp:war">
+    <output-path>$PROJECT_DIR$/out/artifacts/taskapp_war</output-path>
+    <root id="archive" name="taskapp_war.jar" />
+  </artifact>
+</component>

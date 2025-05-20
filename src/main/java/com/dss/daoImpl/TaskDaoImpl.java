@@ -5,6 +5,7 @@ import com.dss.model.Task;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,17 +15,15 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @NoArgsConstructor
-@Repository
+@Repository("hbTaskDao")
 public class TaskDaoImpl implements TaskDao {
 
-    @Inject
+    @PersistenceContext
     private EntityManager entityManager;
 
     @Override
     public void save(Task task) {
-        entityManager.getTransaction().begin();
         entityManager.persist(task);
-        entityManager.getTransaction().commit();
     }
 
     @Override

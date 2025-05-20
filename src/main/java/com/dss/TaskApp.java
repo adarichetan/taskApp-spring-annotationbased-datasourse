@@ -12,7 +12,6 @@ public class TaskApp {
     @Value("${welcome}")
     String x;
 
-
     public void getX() {
         System.out.println(x);
     }

@@ -4,20 +4,19 @@ import com.dss.dao.UserDao;
 import com.dss.model.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-@Repository
+@Repository("hbUserDao")
 public class UserDaoImpl implements UserDao {
+
+    @PersistenceContext
     private EntityManager entityManager;
 
-    @Autowired
-    public UserDaoImpl(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
 
     @Override
     public void save(User user) {
